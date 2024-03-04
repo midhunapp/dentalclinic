@@ -1,6 +1,16 @@
 import axios from "axios";
+import authHeader from './auth.header'
 
-const API_URL = "http://localhost:8080/api/auth/";
+const API_URL = "https://localhost:44329/api/Auth/";
+
+const getRoles1 = async(): Promise<any> => {
+  return axios.get(API_URL + "getRoles", { headers: authHeader() });
+};
+
+const getRoles = async(): Promise<any> => {
+  return axios.get(API_URL + "getRoles");
+};
+//--------------------------------------------
 
 const register = (username:string, email:string, password:string) => {
   return axios.post(API_URL + "signup", {
@@ -33,6 +43,7 @@ const authService = {
   register,
   login,
   logout,
+  getRoles
 };
 
 export default authService;

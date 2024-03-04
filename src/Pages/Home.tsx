@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
@@ -8,9 +8,15 @@ import { useAppSelector, useAppDispatch } from '../app/hooks'
 import { login } from '../features/auth/authActions'
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import {Option} from '../interfaces'
+import authService from '../Services/auth.services'
+
 
 export default function Home() {
   const dispatch = useAppDispatch()
+  const [role, setRole] = useState<string>('');
+  const [roleList, setRoleList] = useState<Option[]>([]);
+
   const initialValues = {
     username: "",
     usertype: "",
@@ -44,8 +50,18 @@ export default function Home() {
         //setSuccessful(false);
       });
   };
- 
-
+  const fetchData = async() => {
+       const roles = await authService.getRoles();
+       alert(JSON.stringify(roles))
+       setRoleList(roles.data);
+  }
+  useEffect(() => {
+    fetchData();
+  }, []);
+  
+  const rolesDropdown = roleList.map((item:Option, index) => (
+    <MenuItem key={index} value={item.id}>{item.name}</MenuItem>
+  ));
   return (
     <React.Fragment>
       <CssBaseline />
@@ -68,10 +84,7 @@ export default function Home() {
       <FormControl required sx={{ m: 1, minWidth: 120 }}>
         <InputLabel id="demo-simple-select-required-label">User Type</InputLabel>
         <Select id="user-type-select" label="User Type *">
-          <MenuItem value=""><em>None</em></MenuItem>   
-          <MenuItem value={10}>Admin</MenuItem>
-          <MenuItem value={20}>Reception</MenuItem>
-          <MenuItem value={30}>Doctor</MenuItem>
+         {rolesDropdown}
         </Select>
         <FormHelperText>Required</FormHelperText>
       </FormControl>

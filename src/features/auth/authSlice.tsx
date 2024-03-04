@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import {login} from './authActions'
-
+import {UserIdentityState} from '../../interfaces'
 const initialState:UserIdentityState ={
     userInfo:undefined,
     userToken:undefined,
