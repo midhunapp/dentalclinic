@@ -15,10 +15,11 @@ export interface IuserInfo {
 }
 
 export interface UserIdentityState {
-    userInfo?: UserInfo,
-    userToken?:string,
+    userInfo: UserInfo|null,
+    userToken:string|null,
+    refreshToken:string|null,
     loading:Boolean ,
-    error?:string ,
+    error:any,
     success:boolean,
     status:string
   }

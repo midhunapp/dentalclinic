@@ -1,11 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import AuthService from "../../Services/auth.services";
 type loginData = {username: string; password: string,usertype:string }
-export const login = createAsyncThunk(
+export const login=  createAsyncThunk(
     "auth/login",
     async (user:loginData, thunkAPI) => {
       try {
-        const data = {name:"Midhuna",username:"midhunapp"};//await AuthService.login(arg.username, arg.password,arg.usertype);
+        const data = await AuthService.login(user.username, user.password,user.usertype);
+       // alert(JSON.stringify(data));
         return { user: data };
       } catch (error:any) {
         const message =
