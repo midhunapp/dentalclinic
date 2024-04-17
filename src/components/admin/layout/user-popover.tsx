@@ -12,9 +12,9 @@ import { GearSix as GearSixIcon } from '@phosphor-icons/react/dist/ssr/GearSix';
 import { SignOut as SignOutIcon } from '@phosphor-icons/react/dist/ssr/SignOut';
 import { User as UserIcon } from '@phosphor-icons/react/dist/ssr/User';
 
-import { paths } from '@/paths';
+import { paths } from '../../../paths';
 //import { authClient } from '@/lib/auth/client';
-import { logger } from '@/lib/default-logger';
+import { logger } from '../../../lib/default-logger';
 //import { useUser } from '@/hooks/use-user';
 
 export interface UserPopoverProps {

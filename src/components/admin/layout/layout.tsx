@@ -3,9 +3,9 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import GlobalStyles from '@mui/material/GlobalStyles';
 
-import { AuthGuard } from '@/components/auth/auth-guard';
-import { MainNav } from '@/components/admin/layout/main-nav';
-import { SideNav } from '@/components/admin/layout/side-nav';
+import { AuthGuard } from '../../auth/auth-guard'//'@/components/auth/auth-guard';
+import { MainNav } from '../../admin/layout/main-nav'//'@/components/admin/layout/main-nav';
+import { SideNav } from '../../admin/layout/side-nav';
 
 interface LayoutProps {
   children: React.ReactNode;

@@ -11,7 +11,7 @@ import { List as ListIcon } from '@phosphor-icons/react/dist/ssr/List';
 import { MagnifyingGlass as MagnifyingGlassIcon } from '@phosphor-icons/react/dist/ssr/MagnifyingGlass';
 import { Users as UsersIcon } from '@phosphor-icons/react/dist/ssr/Users';
 
-import { usePopover } from '@/hooks/use-popover';
+import { usePopover } from '../../../hooks/use-popover'//'../../hooks/use-popover';
 import { UserPopover } from './user-popover';
 
 export function MainNav(): React.JSX.Element {

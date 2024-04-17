@@ -4,15 +4,22 @@ import './App.css';
 import Home from './pages/Home'
 import {Provider} from 'react-redux';
 import store from './store'
-
+import { BrowserRouter, Routes, Route} from 'react-router-dom';
+import Adminhome from './pages/admin/adminhome'
 function App() {
   return (
     <Provider store={store}>
     <div className="App">
-      <Home/>
+    <BrowserRouter>
+      <Routes>
+          <Route index element={<Home />} />
+          <Route path="adminhome" element={<Adminhome />} />
+      </Routes>
+    </BrowserRouter>
+    <Home/>
     </div>
   </Provider>
-  );
+  ); 
 }
 
 export default App;

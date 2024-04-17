@@ -10,7 +10,7 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import {Option} from '../interfaces'
 import authService from '../Services/auth.services'
-
+import { useNavigate, useNavigation } from "react-router-dom";
 
 export default function Home() {
   const dispatch = useAppDispatch()
@@ -18,7 +18,7 @@ export default function Home() {
   const [username,setUsername]=useState("");
   const [userType,setUserType]=useState("");
   const [password,setPassword]=useState("");
- 
+  //const navigate = useNavigate();
   /*
   const validationSchema= Yup.object({
     username: Yup
@@ -49,7 +49,9 @@ export default function Home() {
     dispatch(login(loginData))
       .unwrap()
       .then(() => {
+        alert("navigation")
        // setSuccessful(true);
+      // navigate('/adminhome');
       })
       .catch(() => {
         //setSuccessful(false);

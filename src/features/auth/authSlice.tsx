@@ -2,6 +2,7 @@ import { createSlice ,PayloadAction } from '@reduxjs/toolkit'
 import {login} from './authActions'
 import {UserIdentityState} from '../../interfaces'
 import { UserInfo } from '../../interfaces';
+
   // initialize userToken from local storage
 const userTokenData: string | null = localStorage.getItem('userToken')
 ? localStorage.getItem('userToken')
@@ -20,7 +21,6 @@ const initialState:UserIdentityState ={
   success:false,
   status:""
 }
-
   const authSlice = createSlice({
     name: 'auth',
     initialState,
@@ -45,7 +45,7 @@ const initialState:UserIdentityState ={
         state.loading = true;
       })
       .addCase(login.fulfilled, (state, action: PayloadAction<any>) => {
-       // alert("login succeeded")
+        alert("login succeeded")
         //alert(JSON.stringify(action.payload.user.token))
         //alert(JSON.stringify(action.payload.user.refreshToken))
        // alert(JSON.stringify(action.payload.user.userId))
@@ -75,4 +75,3 @@ const initialState:UserIdentityState ={
   })
   export const { logout, setCredentials } = authSlice.actions
   export default authSlice.reducer
-    

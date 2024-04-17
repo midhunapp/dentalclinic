@@ -1,5 +1,5 @@
 
-import { LogLevel } from '@/lib/logger';
+import { LogLevel } from './lib/logger'//'./../lib/logger';
 
 export interface Config {
   logLevel: keyof typeof LogLevel;

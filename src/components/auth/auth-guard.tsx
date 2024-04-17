@@ -4,8 +4,8 @@ import * as React from 'react';
 import { useRouter } from 'next/navigation';
 import Alert from '@mui/material/Alert';
 
-import { paths } from '@/paths';
-import { logger } from '@/lib/default-logger';
+import { paths } from '../../paths';
+import { logger } from '../../lib/default-logger';
 //import { useUser } from '@/hooks/use-user';
 
 export interface AuthGuardProps {
