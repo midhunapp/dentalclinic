@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { useServerInsertedHTML } from 'next/navigation';
+//import { useServerInsertedHTML } from 'next/navigation';
 import createCache from '@emotion/cache';
 import type { EmotionCache, Options as OptionsOfCreateCache } from '@emotion/cache';
 import { CacheProvider as DefaultCacheProvider } from '@emotion/react';
@@ -44,46 +44,46 @@ export default function NextAppDirEmotionCacheProvider(props: NextAppDirEmotionC
     return { cache, flush };
   });
 
-  useServerInsertedHTML((): React.JSX.Element | null => {
-    const inserted = registry.flush();
+  // useServerInsertedHTML((): React.JSX.Element | null => {
+  //   const inserted = registry.flush();
 
-    if (inserted.length === 0) {
-      return null;
-    }
+  //   if (inserted.length === 0) {
+  //     return null;
+  //   }
 
-    let styles = '';
-    let dataEmotionAttribute = registry.cache.key;
+  //   let styles = '';
+  //   let dataEmotionAttribute = registry.cache.key;
 
-    const globals: { name: string; style: string }[] = [];
+  //   const globals: { name: string; style: string }[] = [];
 
-    inserted.forEach(({ name, isGlobal }) => {
-      const style = registry.cache.inserted[name];
+  //   inserted.forEach(({ name, isGlobal }) => {
+  //     const style = registry.cache.inserted[name];
 
-      if (typeof style !== 'boolean') {
-        if (isGlobal) {
-          globals.push({ name, style });
-        } else {
-          styles += style;
-          dataEmotionAttribute += ` ${name}`;
-        }
-      }
-    });
+  //     if (typeof style !== 'boolean') {
+  //       if (isGlobal) {
+  //         globals.push({ name, style });
+  //       } else {
+  //         styles += style;
+  //         dataEmotionAttribute += ` ${name}`;
+  //       }
+  //     }
+  //   });
 
-    return (
-      <React.Fragment>
-        {globals.map(
-          ({ name, style }): React.JSX.Element => (
-            <style
-              dangerouslySetInnerHTML={{ __html: style }}
-              data-emotion={`${registry.cache.key}-global ${name}`}
-              key={name}
-            />
-          )
-        )}
-        {styles ? <style dangerouslySetInnerHTML={{ __html: styles }} data-emotion={dataEmotionAttribute} /> : null}
-      </React.Fragment>
-    );
-  });
+  //   return (
+  //     <React.Fragment>
+  //       {globals.map(
+  //         ({ name, style }): React.JSX.Element => (
+  //           <style
+  //             dangerouslySetInnerHTML={{ __html: style }}
+  //             data-emotion={`${registry.cache.key}-global ${name}`}
+  //             key={name}
+  //           />
+  //         )
+  //       )}
+  //       {styles ? <style dangerouslySetInnerHTML={{ __html: styles }} data-emotion={dataEmotionAttribute} /> : null}
+  //     </React.Fragment>
+  //   );
+  // });
 
   return <CacheProvider value={registry.cache}>{children}</CacheProvider>;
 }

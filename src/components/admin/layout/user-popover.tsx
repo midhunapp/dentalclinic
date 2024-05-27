@@ -1,6 +1,6 @@
 import * as React from 'react';
-import RouterLink from 'next/link';
-import { useRouter } from 'next/navigation';
+import {Link} from 'react-router-dom'//'next/link';
+//import { useRouter } from 'next/navigation';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -26,7 +26,7 @@ export interface UserPopoverProps {
 export function UserPopover({ anchorEl, onClose, open }: UserPopoverProps): React.JSX.Element {
   //const { checkSession } = useUser();
 
-  const router = useRouter();
+  //const router = useRouter();
 
   const handleSignOut = React.useCallback(async (): Promise<void> => {
     try {
@@ -41,7 +41,7 @@ export function UserPopover({ anchorEl, onClose, open }: UserPopoverProps): Reac
     //  await checkSession?.();
 
       // UserProvider, for this case, will not refresh the router and we need to do it manually
-      router.refresh();
+     // router.refresh();
       // After refresh, AuthGuard will handle the redirect
     } catch (err) {
       logger.error('Sign out error', err);
@@ -64,13 +64,13 @@ export function UserPopover({ anchorEl, onClose, open }: UserPopoverProps): Reac
       </Box>
       <Divider />
       <MenuList disablePadding sx={{ p: '8px', '& .MuiMenuItem-root': { borderRadius: 1 } }}>
-        <MenuItem component={RouterLink} href={paths.dashboard.settings} onClick={onClose}>
+        <MenuItem component={Link} to={paths.dashboard.settings} onClick={onClose}>
           <ListItemIcon>
             <GearSixIcon fontSize="var(--icon-fontSize-md)" />
           </ListItemIcon>
           Settings
         </MenuItem>
-        <MenuItem component={RouterLink} href={paths.dashboard.account} onClick={onClose}>
+        <MenuItem component={Link} to={paths.dashboard.account} onClick={onClose}>
           <ListItemIcon>
             <UserIcon fontSize="var(--icon-fontSize-md)" />
           </ListItemIcon>

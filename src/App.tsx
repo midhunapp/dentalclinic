@@ -10,13 +10,13 @@ function App() {
   return (
     <Provider store={store}>
     <div className="App">
+   
     <BrowserRouter>
       <Routes>
           <Route index element={<Home />} />
           <Route path="adminhome" element={<Adminhome />} />
       </Routes>
     </BrowserRouter>
-    <Home/>
     </div>
   </Provider>
   ); 

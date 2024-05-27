@@ -18,28 +18,20 @@ export default function Home() {
   const [username,setUsername]=useState("");
   const [userType,setUserType]=useState("");
   const [password,setPassword]=useState("");
-  //const navigate = useNavigate();
-  /*
-  const validationSchema= Yup.object({
-    username: Yup
-      .string()
-      .max(255)
-      .required('Username is required'),
-    password: Yup
-      .string()
-      .max(255)
-      .required('Password is required')
-  });
-  */
+  const navigate = useNavigate();
+  const [ userid ,setUserid] = React.useState(localStorage.getItem('userid'));
+
+  const checkUserLoggedIn = async (): Promise<void> => {
+    // alert(userid)
+    if(userid!=null)
+      {
+        navigate('/adminhome');
+      }
+   
+  };
   const handleLogin = (event:any) => {
     event.preventDefault();
 
-    //const { username, usertype, password } = formValue;
-    //alert(username)
-    //alert(userType)
-   // alert(password)
-   
-    //setSuccessful(false);
     
     const loginData={
       username:username,
@@ -51,7 +43,7 @@ export default function Home() {
       .then(() => {
         alert("navigation")
        // setSuccessful(true);
-      // navigate('/adminhome');
+       navigate('/adminhome');
       })
       .catch(() => {
         //setSuccessful(false);
@@ -65,7 +57,8 @@ export default function Home() {
   }
   useEffect(() => {
     fetchData();
-  }, []);
+    checkUserLoggedIn();
+  }, [userid]);
   
   const rolesDropdown = roleList.map((item:Option, index) => (
     <MenuItem key={index} value={item.name}>{item.name}</MenuItem>

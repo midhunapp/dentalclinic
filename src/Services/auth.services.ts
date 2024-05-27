@@ -27,7 +27,7 @@ const login = async (username:string, password:string,usertype:string): Promise<
 
     const json = await response.data;
     console.log(json);
-    console.warn(response.data);
+   // console.warn(response.data);
     return response.data;
   } catch (error) {
     console.warn(error);
