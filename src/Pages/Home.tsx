@@ -6,7 +6,7 @@ import { FormControl, FormHelperText, InputLabel, MenuItem, Select, Stack,TextFi
 import { green } from '@mui/material/colors';
 import { useAppSelector, useAppDispatch } from '../app/hooks'
 import { login } from '../features/auth/authActions'
-import { Formik, Field, Form, ErrorMessage } from "formik";
+//import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import {Option} from '../interfaces'
 import authService from '../Services/auth.services'
@@ -19,13 +19,14 @@ export default function Home() {
   const [userType,setUserType]=useState("");
   const [password,setPassword]=useState("");
   const navigate = useNavigate();
-  const [ userid ,setUserid] = React.useState(localStorage.getItem('userid'));
+  //const [ userid ,setUserid] = React.useState(localStorage.getItem('userid'));
+  const userid=useAppSelector((state) => state.auth.userInfo);
 
   const checkUserLoggedIn = async (): Promise<void> => {
-    // alert(userid)
+    
     if(userid!=null)
       {
-        navigate('/adminhome');
+        navigate('/addUser');
       }
    
   };
@@ -41,24 +42,25 @@ export default function Home() {
     dispatch(login(loginData))
       .unwrap()
       .then(() => {
-        alert("navigation")
-       // setSuccessful(true);
-       navigate('/adminhome');
+        //alert("navigation")
+     
+       navigate('/addUser');
       })
       .catch(() => {
-        //setSuccessful(false);
+       
       });
       
   };
   const fetchData = async() => {
        const roles = await authService.getRoles();
-      // alert(JSON.stringify(roles))
+      
        setRoleList(roles.data);
   }
-  useEffect(() => {
-    fetchData();
+ useEffect(() => {
+   alert(userid);
+   fetchData();
     checkUserLoggedIn();
-  }, [userid]);
+  }, []);
   
   const rolesDropdown = roleList.map((item:Option, index) => (
     <MenuItem key={index} value={item.name}>{item.name}</MenuItem>

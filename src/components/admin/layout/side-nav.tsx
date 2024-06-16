@@ -18,10 +18,11 @@ import { Logo } from '../../../components/core/logo';
 
 import { navItems } from './config';
 import { navIcons } from './nav-icons';
-
+import { useAppSelector, useAppDispatch } from '../../../app/hooks';
+import { useNavigate, useNavigation } from "react-router-dom";
 export function SideNav(): React.JSX.Element {
   const { pathname } = useLocation();
- 
+  const  logedUserInfo  = useAppSelector((state) => state.auth.userInfo);
   return (
     <Box
       sx={{
@@ -70,14 +71,14 @@ export function SideNav(): React.JSX.Element {
               Workspace
             </Typography>
             <Typography color="inherit" variant="subtitle1">
-              Devias
+              {logedUserInfo?.userName}
             </Typography>
           </Box>
           <CaretUpDownIcon />
         </Box>
       </Stack>
       <Divider sx={{ borderColor: 'var(--mui-palette-neutral-700)' }} />
-      <Box component="nav" sx={{ flex: '1 1 auto', p: '12px' }}>
+      <Box component="nav" sx={{ flex: '1 1 auto', p: '12px' }} >
          {renderNavItems({ pathname, items: navItems })} 
       </Box>
       <Divider sx={{ borderColor: 'var(--mui-palette-neutral-700)' }} />
@@ -108,19 +109,13 @@ interface NavItemProps extends Omit<NavItemConfig, 'items'> {
 
 function NavItem({ disabled, external, href, icon, matcher, pathname, title }: NavItemProps): React.JSX.Element {
   const active = isNavItemActive({ disabled, external, href, matcher, pathname });
+  const navigate = useNavigate();
   const Icon = icon ? navIcons[icon] : null;
-
+ // alert(title); alert(href);
   return (
     <li>
-      <Box
-        {...(href
-          ? {
-              component: external ? 'a' : Link,
-              href,
-              target: external ? '_blank' : undefined,
-              rel: external ? 'noreferrer' : undefined,
-            }
-          : { role: 'button' })}
+      <Box {...{role:'button'}} onClick = {(e) =>href?navigate(href):navigate('/')}
+        
         sx={{
           alignItems: 'center',
           borderRadius: 1,
@@ -150,12 +145,12 @@ function NavItem({ disabled, external, href, icon, matcher, pathname, title }: N
             />
           ) : null}
         </Box>
-        <Box sx={{ flex: '1 1 auto' }}>
+        <Box sx={{ flex: '1 1 auto' }} >
           <Typography
             component="span"
             sx={{ color: 'inherit', fontSize: '0.875rem', fontWeight: 500, lineHeight: '28px' }}
           >
-            {title}
+            {title} 
           </Typography>
         </Box>
       </Box>

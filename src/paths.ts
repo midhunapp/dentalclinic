@@ -9,5 +9,12 @@ export const paths = {
       integrations: '/dashboard/integrations',
       settings: '/dashboard/settings',
     },
+    adminMenu: {
+      addUsers: '/addUser',
+      addTreatments: '/addTreatments',
+      customers: '/dashboard/customers',
+      integrations: '/dashboard/integrations',
+      settings: '/dashboard/settings',
+    },
     errors: { notFound: '/errors/not-found' },
   } as const;

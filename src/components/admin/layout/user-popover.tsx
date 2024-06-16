@@ -15,7 +15,9 @@ import { User as UserIcon } from '@phosphor-icons/react/dist/ssr/User';
 import { paths } from '../../../paths';
 //import { authClient } from '@/lib/auth/client';
 import { logger } from '../../../lib/default-logger';
-//import { useUser } from '@/hooks/use-user';
+import { useAppSelector, useAppDispatch } from '../../../app/hooks'
+
+import { logout } from '../../../features/auth/authSlice'
 
 export interface UserPopoverProps {
   anchorEl: Element | null;
@@ -24,25 +26,11 @@ export interface UserPopoverProps {
 }
 
 export function UserPopover({ anchorEl, onClose, open }: UserPopoverProps): React.JSX.Element {
-  //const { checkSession } = useUser();
+  const dispatch = useAppDispatch()
 
-  //const router = useRouter();
-
-  const handleSignOut = React.useCallback(async (): Promise<void> => {
+  const handleSignOut = React.useCallback(async (): Promise<void> => {alert('signout')
     try {
-     // const { error } = await authClient.signOut();
-
-      //if (error) {
-       // logger.error('Sign out error', error);
-       // return;
-     // }
-
-      // Refresh the auth state
-    //  await checkSession?.();
-
-      // UserProvider, for this case, will not refresh the router and we need to do it manually
-     // router.refresh();
-      // After refresh, AuthGuard will handle the redirect
+      dispatch(logout());
     } catch (err) {
       logger.error('Sign out error', err);
     }

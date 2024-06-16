@@ -4,9 +4,9 @@ import * as React from 'react';
 //import { useRouter } from 'next/navigation';
 import Alert from '@mui/material/Alert';
 
-import { paths } from '../../paths';
+import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { logger } from '../../lib/default-logger';
-//import { useUser } from '@/hooks/use-user';
+import { useNavigate, useNavigation } from "react-router-dom";
 
 export interface AuthGuardProps {
   children: React.ReactNode;
@@ -14,26 +14,30 @@ export interface AuthGuardProps {
 
 export function AuthGuard({ children }: AuthGuardProps): React.JSX.Element | null {
  // const router = useRouter();
-  const [ username ,setUsername] = React.useState(localStorage.getItem('userid'));
+  const navigate = useNavigate();
+  const  logedUserInfo  = useAppSelector((state) => state.auth.userInfo);
   const [isChecking, setIsChecking] = React.useState<boolean>(true);
-
+  const [ userid ,setUserid] = React.useState(localStorage.getItem('userid'));
   const checkPermissions = async (): Promise<void> => {
    
-    if (!username) {
+    if (!logedUserInfo) {
       logger.debug('[AuthGuard]: User is not logged in, redirecting to sign in');
+      logger.debug(userid);
       //router.replace(paths.auth.signIn);
-      return;
+      navigate('/');
+     // return;
     }
 
     setIsChecking(false);
   };
 
   React.useEffect(() => {
+    alert("userInfoChanged")
     checkPermissions().catch(() => {
-      // noop
+      
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps -- Expected
-  }, [username]);
+  }, [logedUserInfo]);
 
   if (isChecking) {
     return null;
