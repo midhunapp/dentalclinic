@@ -57,7 +57,7 @@ export default function Home() {
        setRoleList(roles.data);
   }
  useEffect(() => {
-   alert(userid);
+   
    fetchData();
     checkUserLoggedIn();
   }, []);
